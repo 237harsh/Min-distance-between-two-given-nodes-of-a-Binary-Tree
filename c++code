@@ -1,0 +1,52 @@
+ Node* lca(Node* root ,int n1 ,int n2 )
+    {
+            if(!root)return NULL;
+            if(root->data==n1||root->data==n2)
+            {
+                
+              return root;  
+            }
+            
+             Node *l=lca(root->left,n1,n2);
+             
+            Node *r=lca(root->right,n1,n2);
+            
+            
+            if(!l&&r)
+            return r;
+            else if(!r&&l)
+            return l;
+         if(l&&r)
+         return root;
+            
+        
+            
+    }
+    
+    void dis(Node* root,int a,int d,int &ans)
+    
+    {
+         if(!root)return;
+         
+         if(root->data==a)
+         {
+             ans=d;
+         }
+         dis(root->left,a,d+1,ans);
+         dis(root->right,a,d+1,ans);
+              
+              
+              
+    }
+    int findDist(Node* root, int a, int b) {
+       
+        Node *temp=lca(root,a,b);
+        int an1=0,an2=0;
+        dis(temp,a,0,an1);
+         dis(temp,b,0,an2);
+        return an1+an2;
+    }
+};
+
+
+https://practice.geeksforgeeks.org/problems/min-distance-between-two-given-nodes-of-a-binary-tree/1/?page=2&category[]=Tree&sortBy=submissions#
